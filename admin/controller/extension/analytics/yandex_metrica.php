@@ -29,10 +29,10 @@ class ControllerExtensionAnalyticsYandexMetrica extends Controller {
             $this->session->data['success'] = $this->language->get('text_success');
             $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=analytics', true));
         }
-        $data['error_warning'] = $this->error['warning'] ?: '';
-        $data['error_code'] = $this->error['code'] ?: '';
-        $data['yandex_metrica_code'] = $this->request->post['yandex_metrica_code'] ?: $this->model_setting_setting->getSettingValue('yandex_metrica_code', $this->request->get['store_id']);
-        $data['yandex_metrica_status'] = $this->request->post['yandex_metrica_status'] ?: $this->model_setting_setting->getSettingValue('yandex_metrica_status', $this->request->get['store_id']);
+        $data['error_warning'] = isset($this->error['warning']) ? $this->error['warning'] : '';
+        $data['error_code'] = isset($this->error['code']) ? $this->error['code'] : '';
+        $data['yandex_metrica_code'] = isset($this->request->post['yandex_metrica_code']) ? $this->request->post['yandex_metrica_code'] : $this->model_setting_setting->getSettingValue('yandex_metrica_code', $this->request->get['store_id']);
+        $data['yandex_metrica_status'] = isset($this->request->post['yandex_metrica_status']) ? $this->request->post['yandex_metrica_status'] : $this->model_setting_setting->getSettingValue('yandex_metrica_status', $this->request->get['store_id']);
 
         $this->response->setOutput($this->load->view('extension/analytics/yandex_metrica', $data));
     }
